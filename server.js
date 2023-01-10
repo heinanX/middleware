@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express()
-
+const router = require("./router/router.users.js")
 app.use(express.json())
 
 const users = [
@@ -12,9 +12,8 @@ const users = [
     {"username": "linda", "password": "321", "id": 7}
 ]
 
-app.get('/', (req, res) => {
-    res.status(200).json(users)
-})
+app.use('/', router)
+
 
 app.post('/', (req, res) => {
     users.push(req.body)
@@ -23,7 +22,7 @@ app.post('/', (req, res) => {
 })
 
 
-
+module.exports = users
 app.listen(3000, () => { console.log('server is up and running')})
 
 
