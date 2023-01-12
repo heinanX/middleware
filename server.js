@@ -3,9 +3,10 @@ const app = express()
 const router = require("./router/router.users.js")
 const cors = require("cors")
 app.use(express.json())
-// app.use(cors())
+app.use(cors())
 
 app.use('/usersLogin', router)
+
 
 
 app.listen(3000, () => { console.log('server is up and running')})
