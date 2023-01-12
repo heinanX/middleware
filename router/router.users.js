@@ -5,20 +5,24 @@ const cookieSession = require("cookie-session");
 const { Router } = require('express');
 
 router.use(cookieSession({
-    secret: "secret",
-    maxAge: 1000 * 10,
-    httpOnly: false,
+    secret: "s3cr3t",
+    maxAge: 1000 * 100,
+    httpOnly: true,
+    sameSite: 'lax',
 }))
 
 router.get('/', (req, res) => {
-
+    console.log('session', req.session)
+    console.log('cookie inreq', req.headers.cookie);
     res.status(200).json(users)
 })
 
 router.post('/', (req, res) => {
     const { username, password} = req.body
     const user = users.find(element => element.username == username && element.password == password)
-    req.session = {username}
+
+    req.session = { username }
+    console.log(req.session)
     res.status(200).json(user)
 })
 // router.post('/', (req, res) => {

@@ -3,10 +3,13 @@ const app = express()
 const router = require("./router/router.users.js")
 const cors = require("cors")
 app.use(express.json())
-app.use(cors())
+app.use(cors({
+    credentials: true,
+    origin : 'http://127.0.0.1:5500'
+}))
 
 app.use('/usersLogin', router)
-
+app.use(express.static('public'))
 
 
 app.listen(3000, () => { console.log('server is up and running')})
